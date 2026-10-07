@@ -5,7 +5,7 @@ $config = require is_file($configFile) ? $configFile : dirname(__DIR__) . '/conf
 date_default_timezone_set($config['timezone'] ?? 'Asia/Karachi');
 ini_set('display_errors','0');
 ini_set('session.use_strict_mode','1');
-session_name('ledgercraft_'.substr(hash('sha256',$config['db_name']),0,8));
+session_name('readyestate_'.substr(hash('sha256',$config['db_name']),0,8));
 session_set_cookie_params(['httponly'=>true,'secure'=>($config['secure_cookies'] || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off')),'samesite'=>'Lax','path'=>'/']);
 if (PHP_SAPI !== 'cli') {
  session_start();
@@ -39,3 +39,5 @@ function user():array {$u=isset($_SESSION['user_id'])?one('SELECT id,name,email 
 function role(int $company,int $user):string {$m=one('SELECT role FROM memberships WHERE company_id=? AND user_id=?',[$company,$user]);need($m!==null,'You do not have access to this company.');return $m['role'];}
 function audit(int $company,int $user,string $action,string $detail):void{query('INSERT INTO audit_events(company_id,user_id,action,detail) VALUES(?,?,?,?)',[$company,$user,$action,mb_substr($detail,0,250)]);}
 function password_valid(mixed $p):string {need(is_string($p)&&strlen($p)>=12&&strlen($p)<=72,'Use a password between 12 and 72 characters.');return $p;}
+
+

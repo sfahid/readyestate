@@ -28,9 +28,9 @@ try {
   need($config['setup_token']!=='CHANGE-THIS-TO-A-LONG-RANDOM-SECRET'&&strlen($config['setup_token'])>=24&&hash_equals($config['setup_token'],(string)($b['setup_token']??'')),'Enter the setup token from your configuration.');
   $email=strtolower(text_value($b['email']??'',190));need(filter_var($email,FILTER_VALIDATE_EMAIL)!==false,'Enter a valid email.');
   // MySQL advisory lock prevents simultaneous first-admin creation.
-  need((int)query("SELECT GET_LOCK('ledgercraft_first_admin',5)")->fetchColumn()===1,'Setup is busy. Try again.');
+  need((int)query("SELECT GET_LOCK('readyestate_first_admin',5)")->fetchColumn()===1,'Setup is busy. Try again.');
   try {need((int)query('SELECT COUNT(*) FROM users')->fetchColumn()===0,'Setup is already complete.');query('INSERT INTO users(name,email,password_hash) VALUES(?,?,?)',[text_value($b['name']??'',150),$email,password_hash(password_valid($b['password']??''),PASSWORD_DEFAULT)]);$_SESSION['user_id']=(int)db()->lastInsertId();}
-  finally {query("SELECT RELEASE_LOCK('ledgercraft_first_admin')");}
+  finally {query("SELECT RELEASE_LOCK('readyestate_first_admin')");}
   session_regenerate_id(true);$_SESSION['csrf']=bin2hex(random_bytes(32));respond(['ok'=>true]);
  }
  if($action==='login'){
@@ -57,3 +57,5 @@ try {
 }catch(DomainException $e){respond(['error'=>$e->getMessage()],422);}
 catch(JsonException $e){respond(['error'=>'Invalid request data.'],400);}
 catch(Throwable $e){error_log((string)$e);respond(['error'=>'Unable to complete the request. Check the database connection or try again.'],500);}
+
+

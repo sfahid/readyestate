@@ -1,0 +1,7 @@
+{
+  "folders": [{"path": "."}],
+  "settings": {
+    "php.validate.executablePath": "C:/wamp64/bin/php/php8.2.18/php.exe",
+    "files.exclude": {"config/config.php": true, "var": true}
+  }
+}

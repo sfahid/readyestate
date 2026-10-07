@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-putenv('DB_NAME=ledgercraft_test');
+putenv('DB_NAME=readyestate_test');
 require dirname(__DIR__).'/app/accounting.php';
 if(($argv[1]??'')==='worker'){
  try {mutate(['company'=>(int)$argv[2],'request_key'=>bin2hex(random_bytes(16)),'action'=>'payment','invoice'=>(int)$argv[4],'amount'=>'75','account_id'=>(int)$argv[5],'date'=>'2026-09-22'],(int)$argv[3]);echo 'posted';}
@@ -19,3 +19,5 @@ $results=[];foreach($processes as [$proc,$pipes]){$results[]=trim(stream_get_con
 sort($results);need($results===['posted','rejected'],'Concurrent payments must produce exactly one posting.');
 need((int)one('SELECT paid FROM invoices WHERE id=?',[$i])['paid']===7500,'Concurrent paid balance incorrect.');
 echo "PASS simultaneous payments serialize; overpayment is rejected.\n";
+
+

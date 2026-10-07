@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-putenv('DB_NAME=ledgercraft_test');
+putenv('DB_NAME=readyestate_test');
 require dirname(__DIR__).'/app/accounting.php';
-need($config['db_name']==='ledgercraft_test','Tests must use the isolated test database.');
+need($config['db_name']==='readyestate_test','Tests must use the isolated test database.');
 $passed=0;
 function check(bool $v,string $label):void{global $passed;if(!$v)throw new RuntimeException('FAIL: '.$label);$passed++;echo "PASS $label\n";}
 function rejects(callable $f,string $label):void{try{$f();}catch(DomainException){check(true,$label);return;}throw new RuntimeException('FAIL expected rejection: '.$label);}
@@ -59,3 +59,5 @@ action(['action'=>'remove_member','user_id'=>$v]);rejects(fn()=>snapshot($c,$v),
 $badCount=(int)query('SELECT COUNT(*) FROM (SELECT journal_id FROM journal_lines WHERE company_id=? GROUP BY journal_id HAVING SUM(debit)<>SUM(credit)) x',[$c])->fetchColumn();check($badCount===0,'Every individual journal is balanced');
 if(!is_dir(dirname(__DIR__).'/var'))mkdir(dirname(__DIR__).'/var',0700,true);$path=dirname(__DIR__).'/var/qa-session.json';file_put_contents($path,json_encode(['email'=>'qa-'.$tag.'@example.test','password'=>$password,'company'=>$c,'user'=>$u]));
 echo "\n$passed accounting and authorization checks passed.\n";
+
+

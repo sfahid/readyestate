@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-putenv('DB_NAME='.(getenv('DB_NAME')?:'ledgercraft_test'));
+putenv('DB_NAME='.(getenv('DB_NAME')?:'readyestate_test'));
 require dirname(__DIR__).'/app/accounting.php';
 need(str_ends_with($config['db_name'],'_test'),'Income checks require an isolated test database.');
 $n=0;
@@ -38,3 +38,4 @@ $t=one('SELECT SUM(debit) AS d,SUM(credit) AS c FROM journal_lines WHERE company
 verify_income($t['d']===$t['c'],'Income and reversal keep trial balance balanced');
 if(getenv('QA_FIXTURE_FILE'))file_put_contents(getenv('QA_FIXTURE_FILE'),json_encode(['email'=>$email,'password'=>$password,'company'=>$c]));
 echo "$n income checks passed.\n";
+

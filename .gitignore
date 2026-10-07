@@ -1,7 +1,10 @@
-config/config.php
+/config/config.php
+/var/
 *.log
-.env
+/.env
 /vendor/
 /node_modules/
-
-/var/
+/readyestate-source.zip
+/preview-login.png
+*.sql.gz
+*.sql.zip

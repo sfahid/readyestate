@@ -1,7 +1,8 @@
 # For Apache hosts pointing to the repository root. Prefer public/ as the document root.
 Options -Indexes
 RewriteEngine On
-RewriteRule ^(?:app|config|database|bin|tests|\.vscode)(?:/|$) - [F,L,NC]
-RewriteRule ^(?:\.|README|LICENSE|composer|Docker|docker) - [F,L,NC]
+RewriteRule ^(?:app|config|database|bin|tests|var|deploy|\.vscode)(?:/|$) - [F,L,NC]
+RewriteRule ^(?:\.|README|REALESTATE|LICENSE|composer|Docker|docker) - [F,L,NC]
 RewriteRule ^$ public/ [L]
 RewriteRule ^((?!public/).+)$ public/$1 [L]
+

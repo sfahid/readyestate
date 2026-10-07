@@ -1,6 +1,6 @@
-# LedgerCraft real estate and accounting
+# Ready Estate real estate and accounting
 
-The real estate workspace manages independent parties, client property listings, brokerage deals, client money, company-owned property, deal timelines, follow-ups and documents. LedgerCraft accounting remains usable on its own. Brokerage and company-property transactions post balanced entries into the same company books.
+The real estate workspace manages independent parties, client property listings, brokerage deals, client money, company-owned property, deal timelines, follow-ups and documents. Ready Estate accounting remains usable on its own. Brokerage and company-property transactions post balanced entries into the same company books.
 
 ## Brokerage workflow
 

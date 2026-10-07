@@ -131,3 +131,4 @@ function snapshot(int $c,int $u):array {
  $estate=estate_snapshot($c);$crm=crm_snapshot($c);
  return compact('crm','estate','company','accounts','journals','lines','invoices','items','payments','members','audit','r');
 }
+

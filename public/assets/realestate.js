@@ -92,3 +92,4 @@ document.addEventListener('change',event=>{
  const p=estateData().properties.find(p=>String(p.id)===event.target.value);if(!p)return;
  const form=event.target.closest('form');if(p.owner_party_id)form.elements.seller_party_id.value=p.owner_party_id;
 });
+
