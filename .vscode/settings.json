@@ -1,0 +1,16 @@
+{
+  "php.validate.executablePath": "C:/wamp64/bin/php/php8.3.6/php.exe",
+  "php.validate.run": "onSave",
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "files.encoding": "utf8",
+  "files.exclude": {
+    "**/.DS_Store": true
+  },
+  "search.exclude": {
+    "**/vendor": true
+  },
+  "files.associations": {
+    "*.php": "php"
+  }
+}
